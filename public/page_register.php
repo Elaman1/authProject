@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require "../functions/BasicFunctions.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,26 +64,18 @@
                             <div class="col-xl-6 ml-auto mr-auto">
                                 <div class="card p-4 rounded-plus bg-faded">
                                     <?php
-                                    if (isset($_SESSION['messages'])) {
-                                        echo ('
-                                            <div class="alert ' . $_SESSION['messages']['class'] . ' text-dark" role="alert">
-                                                <strong>Уведомление!</strong> ' . $_SESSION['messages']['text'] . '
-                                            </div>
-                                        ');
-                                        unset($_SESSION['messages']);
-
-                                    }
+                                        viewSessionMessage();
                                     ?>
-                                    <form id="js-login" novalidate="" action="functions/registration.php" method="POST">
+                                    <form id="js-login" novalidate="" action="../functions/Registration.php" method="POST">
                                         <div class="form-group">
-                                            <label class="form-label" for="emailverify">Email</label>
-                                            <input name="Email" value="<?php isset($_POST['Email']) ? $_POST['Email'] : 'aa'?>" type="email" id="emailverify" class="form-control" placeholder="Эл. адрес" required>
+                                            <label class="form-label" for="emailVerify">Email</label>
+                                            <input name="Email" value="<?php isset($_POST['Email']) ? $_POST['Email'] : ''?>" type="email" id="emailVerify" class="form-control" placeholder="Эл. адрес" required>
                                             <div class="invalid-feedback">Заполните поле.</div>
                                             <div class="help-block">Эл. адрес будет вашим логином при авторизации</div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label" for="userpassword">Пароль <br></label>
-                                            <input name="Password" type="password" id="userpassword" class="form-control" placeholder="" required>
+                                            <label class="form-label" for="userPassword">Пароль <br></label>
+                                            <input name="Password" type="password" id="userPassword" class="form-control" placeholder="" required>
                                             <div class="invalid-feedback">Заполните поле.</div>
                                         </div>
                                        

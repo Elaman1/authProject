@@ -1,8 +1,9 @@
 <?php
 session_start();
-$pageName = "edit";
-require_once "functions/login.php";
-require_once "functions/configureUser.php";
+$pageName = "status";
+require_once "../functions/Login.php";
+require_once "../functions/ConfigureUser.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,65 +25,55 @@ require_once "functions/configureUser.php";
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="users.php">Главная <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="page_login.php">Войти</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php">Выйти</a>
+                    <a class="nav-link" href="#">Выйти</a>
                 </li>
             </ul>
         </div>
     </nav>
     <main id="js-page-content" role="main" class="page-content mt-3">
+        <?php if (isset($userStatus) && isset($allStatus)) { ?>
         <div class="subheader">
             <h1 class="subheader-title">
-                <i class='subheader-icon fal fa-plus-circle'></i> Редактировать
+                <i class='subheader-icon fal fa-sun'></i> Установить статус
             </h1>
 
         </div>
-        <?php if (isset($userInfo)) {
-        ?>
-        <form action="?userID=<?php echo $userInfo['ID'] ?>" method="post">
+        <form method="post" action="?userID=<?php echo $_SESSION['user']['ID'] ?>">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
                         <div class="panel-container">
                             <div class="panel-hdr">
-                                <h2>Общая информация</h2>
+                                <h2>Установка текущего статуса</h2>
                             </div>
-                                <div class="panel-content">
-                                    <!-- username -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Имя</label>
-                                        <input name="Name" type="text" id="simpleinput" class="form-control" value="<?php echo $userInfo['Name'] ?>">
-                                    </div>
-
-                                    <!-- title -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Место работы</label>
-                                        <input name="Workspace" type="text" id="simpleinput" class="form-control" value="<?php echo $userInfo['Workspace'] ?>">
-                                    </div>
-
-                                    <!-- tel -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Номер телефона</label>
-                                        <input name="Phone" type="text" id="simpleinput" class="form-control" value="<?php echo $userInfo['Phone'] ?>">
-                                    </div>
-
-                                    <!-- address -->
-                                    <div class="form-group">
-                                        <label class="form-label" for="simpleinput">Адрес</label>
-                                        <input name="Address" type="text" id="simpleinput" class="form-control" value="<?php echo $userInfo['Address'] ?>">
+                            <div class="panel-content">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <!-- status -->
+                                        <div class="form-group">
+                                            <label class="form-label" for="example-select">Выберите статус</label>
+                                            <select name="status" class="form-control" id="example-select">
+                                                <?php foreach ($allStatus as $status) {
+                                                    echo $status['ID'] . "a " . $userStatus;
+                                                    ?>
+                                                    <option value='<?= $status['ID'] ?>' <?= ($status['ID'] == $userStatus) ? "selected='selected'" : "" ?>><?= $status['Title'] ?></option>
+                                                <?php }
+                                                    ?>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                        <button class="btn btn-warning">Редактировать</button>
+                                        <button class="btn btn-warning">Изменить</button>
                                     </div>
                                 </div>
+                            </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>

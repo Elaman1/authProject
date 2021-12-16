@@ -1,8 +1,8 @@
 <?php
 session_start();
 $pageName = "users";
-require_once "functions/login.php";
-require_once "functions/users.php";
+require_once dirname(__FILE__) . "/../functions/Login.php";
+require_once dirname(__FILE__) . "/../functions/Users.php";
 
 ?>
 <!DOCTYPE html>
@@ -31,9 +31,6 @@ require_once "functions/users.php";
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="page_login.php">Войти</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="index.php">Выйти</a>
                     </li>
                 </ul>
@@ -42,15 +39,7 @@ require_once "functions/users.php";
 
         <main id="js-page-content" role="main" class="page-content mt-3">
             <?php
-            if (isset($_SESSION['messages'])) {
-                echo ('
-                    <div class="alert ' . $_SESSION['messages']['class'] . ' ">
-                         ' . $_SESSION['messages']['text'] . '
-                    </div>
-                    ');
-                unset($_SESSION['messages']);
-
-            }
+                viewSessionMessage();
             ?>
             <div class="subheader">
                 <h1 class="subheader-title">
@@ -97,7 +86,7 @@ require_once "functions/users.php";
                                             <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
                                                 <?php echo $user['Name'] ?>
                                             <?php
-                                                if ($_SESSION['userID'] == $user['ID'] || (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1)) {
+                                                if ($_SESSION['user']['ID'] == $user['ID'] || (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1)) {
 
                                                     ?>
                                                 <i class="fal fas fa-cog fa-fw d-inline-block ml-1 fs-md"></i>

@@ -1,3 +1,9 @@
+<?php
+session_start();
+$pageName = "createUser";
+require_once dirname(__FILE__) . "/../functions/Login.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,10 +30,7 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="page_login.php">Войти</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Выйти</a>
+                    <a class="nav-link" href="index.php">Выйти</a>
                 </li>
             </ul>
         </div>

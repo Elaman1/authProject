@@ -1,15 +1,14 @@
 <?php
 session_start();
-$pageName = "security";
-require_once "functions/login.php";
-require_once "functions/configureUser.php";
-
+$pageName = "edit";
+require_once "../functions/Login.php";
+require_once "../functions/ConfigureUser.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Безопаность</title>
+    <title>Document</title>
     <meta name="description" content="Chartist.html">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
@@ -41,58 +40,49 @@ require_once "functions/configureUser.php";
     <main id="js-page-content" role="main" class="page-content mt-3">
         <div class="subheader">
             <h1 class="subheader-title">
-                <i class='subheader-icon fal fa-lock'></i> Безопасность
+                <i class='subheader-icon fal fa-plus-circle'></i> Редактировать
             </h1>
 
         </div>
-        <?php
-        if (isset($_SESSION['messages'])) {
-            echo ('
-                    <div class="alert ' . $_SESSION['messages']['class'] . ' ">
-                         ' . $_SESSION['messages']['text'] . '
-                    </div>
-                    ');
-            unset($_SESSION['messages']);
-
-        }
+        <?php if (isset($userInfo)) {
         ?>
-        <?php
-        if (isset($userSecurity)) {
-        ?>
-        <form method="post" action="?userID=<?php echo $userSecurity['ID'] ?>">
+        <form action="?userID=<?php echo $userInfo['ID'] ?>" method="post">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
                         <div class="panel-container">
                             <div class="panel-hdr">
-                                <h2>Обновление эл. адреса и пароля</h2>
+                                <h2>Общая информация</h2>
                             </div>
-                            <div class="panel-content">
-                                <!-- email -->
-                                <div class="form-group">
-                                    <label class="form-label" for="simpleinput">Email</label>
-                                    <input name="Email" type="text" id="simpleinput" class="form-control" value="<?php echo $userSecurity['Email'] ?>">
-                                </div>
+                                <div class="panel-content">
+                                    <!-- username -->
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Имя</label>
+                                        <input name="Name" type="text" id="simpleinput" class="form-control" value="<?php echo $userInfo['Name'] ?>">
+                                    </div>
 
-                                <!-- password -->
-                                <div class="form-group">
-                                    <label class="form-label" for="simpleinput">Пароль</label>
-                                    <input name="Password" type="password" id="simpleinput" class="form-control">
-                                </div>
+                                    <!-- title -->
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Место работы</label>
+                                        <input name="Workspace" type="text" id="simpleinput" class="form-control" value="<?php echo $userInfo['Workspace'] ?>">
+                                    </div>
 
-                                <!-- password confirmation-->
-                                <div class="form-group">
-                                    <label class="form-label" for="simpleinput">Подтверждение пароля</label>
-                                    <input name="Password2" type="password" id="simpleinput" class="form-control">
-                                </div>
+                                    <!-- tel -->
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Номер телефона</label>
+                                        <input name="Phone" type="text" id="simpleinput" class="form-control" value="<?php echo $userInfo['Phone'] ?>">
+                                    </div>
 
-
-                                <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                    <button class="btn btn-warning">Изменить</button>
+                                    <!-- address -->
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Адрес</label>
+                                        <input name="Address" type="text" id="simpleinput" class="form-control" value="<?php echo $userInfo['Address'] ?>">
+                                    </div>
+                                    <div class="col-md-12 mt-3 d-flex flex-row-reverse">
+                                        <button class="btn btn-warning">Редактировать</button>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>

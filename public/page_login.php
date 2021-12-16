@@ -1,6 +1,6 @@
 <?php
 $pageName = "page_login";
-require "functions/login.php";
+require dirname(__FILE__) . "/../functions/Login.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,17 +39,9 @@ require "functions/login.php";
         <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
 
             <?php
-            if (isset($_SESSION['messages'])) {
-                echo ('
-                    <div class="alert ' . $_SESSION['messages']['class'] . ' ">
-                         ' . $_SESSION['messages']['text'] . '
-                    </div>
-                    ');
-                unset($_SESSION['messages']);
-
-            }
+                viewSessionMessage();
             ?>
-            <form action="functions/login.php" method="POST">
+            <form action="" method="POST">
                 <div class="form-group">
                     <label class="form-label" for="username">Email</label>
                     <input name="Email" type="email" id="username" class="form-control" placeholder="Эл. адрес" value="">

@@ -3,8 +3,6 @@
 // Страница на подобии выхода, если перейти сюда то выходишь из аккаунта
 session_start();
 if (isset($_SESSION['loggin_in'])) {
-    unset($_SESSION['loggin_in']);
-    unset($_SESSION['messages']);
-    unset($_SESSION['userID']);
+    unset($_SESSION);
 }
-header('Location: authProject/page_login.php');
+header('Location: page_login.php');
